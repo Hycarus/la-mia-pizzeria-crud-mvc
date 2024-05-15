@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    string name = "Mirko";
+    string surname = "Marasco";
+
+    int sommaNumeri(int num)
+    {
+        int somma = 0;
+        for(int i = 0; i <= num; i++)
+        {
+            somma += i;
+        }
+        return somma;
+    }
+
+    string phrase = "nel mezzo del cammin di nostra vita";
+    int count = phrase.Count(x => x == 'a');
+
+    Random random = new Random();
+    List<int> list = new List<int>();
+    for(int i = 0; i < 20; i++)
+    {
+        list.Add(random.Next(1, 91));
+    }
+    List<int> filteredNumbers = list.Where(num => num >= 20 && num <= 70).ToList();
+
+    string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+    DateTime todayDate = DateTime.Today;
+    DateTime sevenDaysAgo = todayDate.AddDays(-7);
+    string whatDayIsToday = todayDate.DayOfWeek.ToString();
+    string whatDayNextYear = todayDate.AddYears(1).DayOfWeek.ToString();
+}
+
+<div class="text-center">
+    <h2>Nome: @name Cognome: @surname</h2>
+    <span>Somma di numeri: @sommaNumeri(5)</span>
+    <div>Lettera 'a' all'interno della frase "nel mezzo del cammin di nostra vita": @count</div>
+    <div>Lista di numeri randomici e filtrati</div>
+    <ul style="list-style:none">
+        @{
+            foreach (int num in filteredNumbers)
+            {
+                <li>@num</li>
+            }
+        }
+    </ul>
+    <div>Data di oggi: @date</div>
+    <div>Giorno 7 giorni fa: @sevenDaysAgo</div>
+    <div>Giorno della settimana oggi: @whatDayIsToday</div>
+    <div>Giorno della settimana tra un anno: @whatDayNextYear</div>
+</div>
+

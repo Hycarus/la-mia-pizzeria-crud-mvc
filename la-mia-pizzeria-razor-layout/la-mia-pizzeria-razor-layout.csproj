@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>la_mia_pizzeria_static</RootNamespace>
+    <UserSecretsId>1b6cd2ed-579d-4a4a-a1c1-e092270837ab</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.29" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Menu\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Menu\" />
+  </ItemGroup>
+</Project>

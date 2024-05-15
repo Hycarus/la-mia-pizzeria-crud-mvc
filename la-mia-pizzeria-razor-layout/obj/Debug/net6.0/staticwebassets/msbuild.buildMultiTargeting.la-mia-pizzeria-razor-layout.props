@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/la-mia-pizzeria-razor-layout.props" />
+</Project>

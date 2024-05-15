@@ -1,0 +1,52 @@
+﻿
+<header>
+    <div class="logo">Pizzeria Bella Napoli</div>
+    <nav>
+        <ul>
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-controller="Menu" asp-action="Index">Menu</a></li>
+            <li><a href="#">Contatti</a></li>
+        </ul>
+    </nav>
+</header>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    header {
+        background-color: #f8f8f8;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #333;
+        padding: 10px;
+    }
+
+    nav ul li a:hover {
+        background-color: #ddd;
+    }
+</style>

@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/la_mia_pizzeria_static.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @Html.Partial("_LayoutHeader")
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Benvenuti alla Pizzeria Bella Napoli</h1>
+                <p>La migliore pizza fatta con amore!</p>
+                <a href="#" class="btn">Visualizza il nostro menu</a>
+            </div>
+        </section>
+        
+    </main>
+    @Html.Partial("_LayoutFooter")
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+
+<style>
+    .hero-section {
+        background-image: url("https://img.pikbest.com/wp/202344/cooking-delicious-top-view-of-pizza-on-a-textured-gray-background-concept_9925164.jpg!w700wp");
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        text-align: center;
+        padding: 100px 0;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
+
+    .hero-content p {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        background-color: #FFD700;
+        color: #333;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #FFA500;
+    }
+
+</style>
+

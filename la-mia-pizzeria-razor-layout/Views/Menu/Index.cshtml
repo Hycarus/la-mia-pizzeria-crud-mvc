@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+    Layout = null;
+    List<Pizza> pizzas = new List<Pizza>();
+    Pizza margherita = new Pizza("Margherita", "Passata di pomodoro, Mozzarella", "https://www.finedininglovers.it/sites/g/files/xknfdk1106/files/fdl_content_import_it/margherita-50kalo.jpg", (decimal)6.50);
+    Pizza quattroStagioni = new Pizza("4 Stagioni", "Passata di pomodoro, Mozzarella, Prosciutto cotto, Carcofini, Funghi, Pomodorini", "https://www.petitchef.it/imgupl/recipe/pizza-4-stagioni--449891p695427.jpg", (decimal)8.00);
+    Pizza marinara = new Pizza("Marinara", "Passata di pomodoro, Aglio, Olio", "https://www.pizzarecipe.org/wp-content/uploads/2019/01/Pizza-Marinara.jpg", (decimal)5.50);
+    Pizza prosciuttoFughi = new Pizza("Prosciutto e Funghi", "Passata di pomodoro, Mozzarella, Prosciutto cotto, Funghi", "https://i1.wp.com/www.piccolericette.net/piccolericette/wp-content/uploads/2019/10/4102_Pizza.jpg?resize=895%2C616&ssl=1", (decimal)7.50);
+    pizzas.Add(margherita);
+    pizzas.Add(quattroStagioni);
+    pizzas.Add(marinara);
+    pizzas.Add(prosciuttoFughi);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    @Html.Partial("_LayoutHeader")
+    <main>
+        <section class="menu-section">
+            <h2>Il nostro Menu</h2>
+            <div class="menu-items">
+                @{
+                    foreach (Pizza pizza in pizzas)
+                    {
+                        <div class="menu-item">
+                            <p>@pizza.Name</p>
+                            <p>Ingredienti: @pizza.Overview</p>
+                            <div>
+                                <img class="w-100" src="@pizza.Image" alt="@pizza.Name" />
+                            </div>
+                            <p>Prezzo: $@pizza.Price</p>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+    </main>
+    @Html.Partial("_LayoutFooter")
+</body>
+</html>
+
+<style>
+    main {
+        padding: 20px;
+    }
+
+    .menu-section {
+        text-align: center;
+    }
+
+    .menu-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .menu-item {
+        background-color: #f8f8f8;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-item img {
+        max-width: 100%;
+        border-radius: 5px;
+    }
+
+    .menu-item h3 {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .menu-item p {
+        font-style: italic;
+        margin-bottom: 10px;
+    }
+
+    .menu-item span {
+        font-weight: bold;
+        color: #FF0000;
+    }
+
+</style>
+
