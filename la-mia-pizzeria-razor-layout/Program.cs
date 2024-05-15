@@ -1,4 +1,6 @@
-﻿namespace la_mia_pizzeria_static;
+﻿using la_mia_pizzeria_static.Models;
+
+namespace la_mia_pizzeria_static;
 
 public class Program
 {
@@ -9,6 +11,7 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+        builder.Services.AddDbContext<PizzaContext>();
 
         var app = builder.Build();
 

@@ -1,8 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Pizza
+@{
+    ViewData["Title"] = "Dettagli della Pizza";
     Layout = null;
 }
-
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -11,13 +11,14 @@
 <body>
     @Html.Partial("_LayoutHeader")
     <main>
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1>Benvenuti alla Pizzeria Bella Napoli</h1>
-                <p>La migliore pizza fatta con amore!</p>
-                <a asp-controller="Pizza" asp-action="Index" class="btn">Visualizza il nostro menu</a>
-            </div>
-        </section>
+        <h1>Dettagli della Pizza</h1>
+        <div class="pizza-details">
+            <h2>@Model.Name</h2>
+            <img src="@Model.Image" alt="@Model.Name" class="pizza-image" />
+            <p>@Model.Overview</p>
+            <p><strong>Prezzo:</strong> @Model.Price €</p>
+            <a asp-controller="Pizza" asp-action="Index" class="btn btn-primary">Torna alla lista delle pizze</a>
+        </div>
     </main>
     @Html.Partial("_LayoutFooter")
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mirko/boolean/DotNet/la-mia-pizzeria-razor-layout/la-mia-pizzeria-razor-layout.csproj": {}
+    "/Users/mirko/boolean/DotNet/la-mia-pizzeria-crud-mvc/la-mia-pizzeria-razor-layout/la-mia-pizzeria-razor-layout.csproj": {}
   },
   "projects": {
-    "/Users/mirko/boolean/DotNet/la-mia-pizzeria-razor-layout/la-mia-pizzeria-razor-layout.csproj": {
+    "/Users/mirko/boolean/DotNet/la-mia-pizzeria-crud-mvc/la-mia-pizzeria-razor-layout/la-mia-pizzeria-razor-layout.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mirko/boolean/DotNet/la-mia-pizzeria-razor-layout/la-mia-pizzeria-razor-layout.csproj",
+        "projectUniqueName": "/Users/mirko/boolean/DotNet/la-mia-pizzeria-crud-mvc/la-mia-pizzeria-razor-layout/la-mia-pizzeria-razor-layout.csproj",
         "projectName": "la-mia-pizzeria-razor-layout",
-        "projectPath": "/Users/mirko/boolean/DotNet/la-mia-pizzeria-razor-layout/la-mia-pizzeria-razor-layout.csproj",
+        "projectPath": "/Users/mirko/boolean/DotNet/la-mia-pizzeria-crud-mvc/la-mia-pizzeria-razor-layout/la-mia-pizzeria-razor-layout.csproj",
         "packagesPath": "/Users/mirko/.nuget/packages/",
-        "outputPath": "/Users/mirko/boolean/DotNet/la-mia-pizzeria-razor-layout/obj/",
+        "outputPath": "/Users/mirko/boolean/DotNet/la-mia-pizzeria-crud-mvc/la-mia-pizzeria-razor-layout/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/mirko/.nuget/NuGet/NuGet.Config"
@@ -33,6 +33,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -42,6 +47,20 @@
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
               "version": "[6.0.29, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.30, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.30, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.6, )"
             }
           },
           "imports": [
@@ -63,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.406/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/RuntimeIdentifierGraph.json"
         }
       }
     }
