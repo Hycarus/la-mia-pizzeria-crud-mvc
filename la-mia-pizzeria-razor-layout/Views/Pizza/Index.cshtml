@@ -17,6 +17,7 @@
     <main>
         <section class="menu-section">
             <h2>Il nostro Menu</h2>
+            <a asp-action="Create" class="btn btn-primary mb-3">Crea Nuova Pizza</a>
             <div class="menu-items">
                 @if (Model == null || !Model.Any())
                 {
