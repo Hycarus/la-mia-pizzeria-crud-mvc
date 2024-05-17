@@ -51,6 +51,42 @@ namespace la_mia_pizzeria_static.Controllers
             }
             return View(pizza);
         }
+
+        public IActionResult Edit(int id)
+        {
+            Pizza pizza = _context.Pizzas.Find(id);
+            if(pizza == null)
+            {
+                return NotFound();
+            }
+            return View(pizza);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Pizza pizza)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Pizzas.Update(pizza);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(pizza);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            Pizza pizza = _context.Pizzas.Find(id);
+            if(pizza != null)
+            {
+                _context.Pizzas.Remove(pizza);
+                _context.SaveChanges();
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
 

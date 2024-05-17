@@ -1,27 +1,14 @@
 ﻿@model Pizza
 @{
     ViewData["Title"] = "Dettagli della Pizza";
-    Layout = null;
 }
-<head>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/la_mia_pizzeria_static.styles.css" asp-append-version="true" />
-</head>
-<body>
-    @Html.Partial("_LayoutHeader")
-    <main>
-        <h1>Dettagli della Pizza</h1>
-        <div class="pizza-details">
-            <h2>@Model.Name</h2>
-            <img src="@Model.Image" alt="@Model.Name" class="pizza-image" />
-            <p>@Model.Overview</p>
-            <p><strong>Prezzo:</strong> @Model.Price €</p>
-            <a asp-controller="Pizza" asp-action="Index" class="btn btn-primary">Torna alla lista delle pizze</a>
-        </div>
-    </main>
-    @Html.Partial("_LayoutFooter")
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</body>
+
+<h1>Dettagli della Pizza</h1>
+<div class="pizza-details">
+    <h2>@Model.Name</h2>
+    <img src="@Model.Image" alt="@Model.Name" class="pizza-image" />
+    <p>@Model.Overview</p>
+    <p><strong>Prezzo:</strong> @Model.Price €</p>
+    <a asp-controller="Pizza" asp-action="Index" class="btn btn-primary">Torna alla lista delle pizze</a>
+</div>
+

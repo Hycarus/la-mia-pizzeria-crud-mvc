@@ -1,35 +1,34 @@
 ﻿@model Pizza
-@{ViewData["Title"] = "Crea nuova Pizza";
+@{ViewData["Title"] = "Modifica Pizza";
 }
 
-<h1>Crea Nuova Pizza</h1>
+<h1>Modifica Pizza</h1>
 
-<div class="pizza-create-form">
-    <form asp-action="Create" method="post">
+<div class="pizza-edit-form">
+    <form asp-action="Edit" method="post">
         <div class="form-group">
-            <label asp-for="Name" class="control-label">Nome</label>
+            <label asp-for="Name" class="control-label"></label>
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Overview" class="control-label">Descrizione</label>
+            <label asp-for="Overview" class="control-label"></label>
             <textarea asp-for="Overview" class="form-control"></textarea>
             <span asp-validation-for="Overview" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Price" class="control-label">Prezzo</label>
+            <label asp-for="Price" class="control-label"></label>
             <input asp-for="Price" class="form-control" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Image" class="control-label">Immagine</label>
+            <label asp-for="Image" class="control-label"></label>
             <input asp-for="Image" class="form-control" />
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="submit" value="Crea" class="btn btn-primary" />
+            <input type="submit" value="Salva Modifiche" class="btn btn-primary" />
             <a asp-action="Index" class="btn btn-secondary">Annulla</a>
         </div>
     </form>
 </div>
-
