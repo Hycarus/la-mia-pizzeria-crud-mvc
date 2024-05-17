@@ -25,7 +25,7 @@ namespace la_mia_pizzeria_static.Models
 
 		[Required(ErrorMessage = "Il prezzo della pizza è obbligatorio")]
 		[Range(0.01, double.MaxValue, ErrorMessage = "Il prezzo della pizza deve essere maggiore di zero")]
-		public decimal Price { get; set; }
+		public decimal? Price { get; set; }
 	}
 
 	public class  MinWords : ValidationAttribute
@@ -45,6 +45,11 @@ namespace la_mia_pizzeria_static.Models
 				{
 					return new ValidationResult(ErrorMessage);
 				}
+			}
+
+			if(value == " ")
+			{
+				return new ValidationResult(ErrorMessage);
 			}
 			return ValidationResult.Success;
 		}
