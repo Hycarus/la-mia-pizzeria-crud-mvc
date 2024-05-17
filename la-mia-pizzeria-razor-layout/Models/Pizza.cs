@@ -28,10 +28,10 @@ namespace la_mia_pizzeria_static.Models
 		public decimal? Price { get; set; }
 	}
 
-	public class  MinWords : ValidationAttribute
+	public class  MinWordsAttribute : ValidationAttribute
 	{
 		private readonly int _minWords;
-		public MinWords(int minWords)
+		public MinWordsAttribute(int minWords)
 		{
 			this._minWords = minWords;
 		}
@@ -41,7 +41,7 @@ namespace la_mia_pizzeria_static.Models
 			if(value != null)
 			{
 				var valueAsString = value.ToString();
-				if(valueAsString.Split(' ').Length < _minWords)
+				if(valueAsString.Split(' ').Where(s => s.Length > 0).Count() < _minWords)
 				{
 					return new ValidationResult(ErrorMessage);
 				}
