@@ -1,92 +1,110 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using la_mia_pizzeria_static.Data;
 using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Hosting;
+using System.Diagnostics;
 
 namespace la_mia_pizzeria_static.Controllers
 {
-    public class PizzaController : Controller
+    public class pizzaController : Controller
     {
-        private readonly PizzaContext _context;
-
-        public PizzaController(PizzaContext context)
-        {
-            _context = context;
-        }
-        // GET: /<controller>/
+      
         public IActionResult Index()
         {
-            var pizzas = _context.Pizzas.ToList();
-            return View(pizzas);
+            return View(PizzaManager.GetAllPizzas());
         }
 
         public IActionResult Details(int id)
         {
-            Pizza pizza = _context.Pizzas.Find(id);
-            if(pizza == null)
-            {
-                return NotFound();
-            }
-            return View(pizza);
+            var pizza = PizzaManager.GetPizza(id, true);
+            if (pizza != null)
+                return View(pizza);
+            else
+                return View("errore");
         }
 
+
+        [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            PizzaFormModel model = new PizzaFormModel();
+            model.Pizza = new Pizza();
+            model.Categories = PizzaManager.GetAllCategories();
+            ViewBag.Categories = new SelectList(model.Categories, "Id", "Name");
+            return View(model);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza pizza)
+        public IActionResult Create(PizzaFormModel data)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Pizzas.Add(pizza);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Categories = new SelectList(data.Categories, "Id", "Name");
+                return View("Create", data);
             }
-            return View(pizza);
+
+            PizzaManager.InsertPizza(data.Pizza);
+            return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
-            Pizza pizza = _context.Pizzas.Find(id);
-            if(pizza == null)
+
+            var pizzaToEdit = PizzaManager.GetPizza(id);
+
+            if (pizzaToEdit == null)
             {
                 return NotFound();
             }
-            return View(pizza);
+            else
+            {
+                PizzaFormModel model = new PizzaFormModel(pizzaToEdit, PizzaManager.GetAllCategories());
+                ViewBag.Categories = new SelectList(model.Categories, "Id", "Name", pizzaToEdit.CategoryId);
+                return View(model);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Pizza pizza)
+        public IActionResult Edit(int id, PizzaFormModel data)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Pizzas.Update(pizza);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Categories = new SelectList(data.Categories, "Id", "Name", data.Pizza.CategoryId);
+                return View("Update", data);
             }
-            return View(pizza);
+
+            bool result = PizzaManager.UpdatePizza(id, pizzaToEdit =>
+            {
+                pizzaToEdit.Name = data.Pizza.Name;
+                pizzaToEdit.Overview = data.Pizza.Overview;
+                pizzaToEdit.CategoryId = data.Pizza.CategoryId;
+            });
+
+            if (result == true)
+                return RedirectToAction("Index");
+            else
+                return NotFound();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            Pizza pizza = _context.Pizzas.Find(id);
-            if(pizza != null)
-            {
-                _context.Pizzas.Remove(pizza);
-                _context.SaveChanges();
-            }
-            return RedirectToAction(nameof(Index));
+            if (PizzaManager.DeletePizza(id))
+                return RedirectToAction("Index");
+            else
+                return NotFound();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
-

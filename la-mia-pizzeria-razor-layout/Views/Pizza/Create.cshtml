@@ -1,30 +1,35 @@
-﻿@model Pizza
-@{ViewData["Title"] = "Crea nuova Pizza";
-}
+﻿@using la_mia_pizzeria_static.Data
+@model PizzaFormModel
 
 <h1>Crea Nuova Pizza</h1>
 
 <div class="pizza-create-form">
-    <form asp-action="Create" method="post">
+    <form asp-controller="Pizza" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
         <div class="form-group">
-            <label asp-for="Name" class="control-label">Nome</label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <label asp-for="Pizza.Name" class="control-label">Nome</label>
+            <input asp-for="Pizza.Name" class="form-control" />
+            <span asp-validation-for="Pizza.Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Overview" class="control-label">Descrizione</label>
-            <textarea asp-for="Overview" class="form-control"></textarea>
-            <span asp-validation-for="Overview" class="text-danger"></span>
+            <label asp-for="Pizza.Overview" class="control-label">Descrizione</label>
+            <textarea asp-for="Pizza.Overview" class="form-control"></textarea>
+            <span asp-validation-for="Pizza.Overview" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Price" class="control-label">Prezzo</label>
-            <input asp-for="Price" class="form-control" />
-            <span asp-validation-for="Price" class="text-danger"></span>
+            <label asp-for="Pizza.Price" class="control-label">Prezzo</label>
+            <input asp-for="Pizza.Price" class="form-control" />
+            <span asp-validation-for="Pizza.Price" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Image" class="control-label">Immagine</label>
-            <input asp-for="Image" class="form-control" />
-            <span asp-validation-for="Image" class="text-danger"></span>
+            <label asp-for="Pizza.Image" class="control-label">Immagine</label>
+            <input asp-for="Pizza.Image" class="form-control" />
+            <span asp-validation-for="Pizza.Image" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Pizza.CategoryId">Categoria</label>
+            <select asp-for="Pizza.CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+            <span asp-validation-for="Pizza.CategoryId" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="submit" value="Crea" class="btn btn-primary" />

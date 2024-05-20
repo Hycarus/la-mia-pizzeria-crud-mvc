@@ -21,8 +21,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Pizza\" />
+    <None Remove="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Pizza\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,10 @@
     <img src="@Model.Image" alt="@Model.Name" class="pizza-image" />
     <p>@Model.Overview</p>
     <p><strong>Prezzo:</strong> @Model.Price €</p>
+    <div>
+        <p>Categorie: @Model.Category.Name</p>
+    </div>
+    
     <a asp-controller="Pizza" asp-action="Index" class="btn btn-primary">Torna alla lista delle pizze</a>
 </div>
 
