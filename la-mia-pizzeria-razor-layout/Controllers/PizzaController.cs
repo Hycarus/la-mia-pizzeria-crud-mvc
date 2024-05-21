@@ -31,6 +31,7 @@ namespace la_mia_pizzeria_static.Controllers
             PizzaFormModel model = new PizzaFormModel();
             model.Pizza = new Pizza();
             model.Categories = PizzaManager.GetAllCategories();
+            model.CreateIngredients();
             ViewBag.Categories = new SelectList(model.Categories, "Id", "Name");
             return View(model);
         }
@@ -43,10 +44,11 @@ namespace la_mia_pizzeria_static.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Categories = new SelectList(data.Categories, "Id", "Name");
+                data.CreateIngredients();
                 return View("Create", data);
             }
 
-            PizzaManager.InsertPizza(data.Pizza);
+            PizzaManager.InsertPizza(data.Pizza, data.SelectedIngredients);
             return RedirectToAction("Index");
         }
 
@@ -64,6 +66,7 @@ namespace la_mia_pizzeria_static.Controllers
             {
                 PizzaFormModel model = new PizzaFormModel(pizzaToEdit, PizzaManager.GetAllCategories());
                 ViewBag.Categories = new SelectList(model.Categories, "Id", "Name", pizzaToEdit.CategoryId);
+                model.CreateIngredients();
                 return View(model);
             }
         }
@@ -72,20 +75,16 @@ namespace la_mia_pizzeria_static.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, PizzaFormModel data)
         {
+            
             if (!ModelState.IsValid)
             {
-                ViewBag.Categories = new SelectList(data.Categories, "Id", "Name", data.Pizza.CategoryId);
-                return View("Update", data);
+                ViewBag.Categories = new SelectList(PizzaManager.GetAllCategories(), "Id", "Name", data.Pizza.CategoryId);
+                //data.Categories = PizzaManager.GetAllCategories();
+                data.CreateIngredients();
+                return View("Edit", data);
             }
 
-            bool result = PizzaManager.UpdatePizza(id, pizzaToEdit =>
-            {
-                pizzaToEdit.Name = data.Pizza.Name;
-                pizzaToEdit.Overview = data.Pizza.Overview;
-                pizzaToEdit.CategoryId = data.Pizza.CategoryId;
-            });
-
-            if (result == true)
+            if (PizzaManager.UpdatePizza(id, data.Pizza.Name, data.Pizza.Overview, data.Pizza.CategoryId, data.SelectedIngredients))
                 return RedirectToAction("Index");
             else
                 return NotFound();

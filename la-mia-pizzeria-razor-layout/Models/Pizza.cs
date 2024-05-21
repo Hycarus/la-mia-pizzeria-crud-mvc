@@ -30,6 +30,8 @@ namespace la_mia_pizzeria_static.Models
 
 		public int? CategoryId { get; set; }
 		public Category? Category { get; set; }
+
+		public List<Ingredient>? Ingredients { get; set; }
 	}
 
 	public class  MinWordsAttribute : ValidationAttribute
@@ -64,6 +66,8 @@ namespace la_mia_pizzeria_static.Models
 		//public PizzaContext(DbContextOptions<PizzaContext> options) : base(options) { }
 		public DbSet<Pizza>? Pizzas { get; set; }
 		public DbSet<Category>? Categories { get; set; }
+		public DbSet<Ingredient>? Ingredients { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -97,9 +101,15 @@ namespace la_mia_pizzeria_static.Models
 				new Pizza { Id = 4, Name = "Prosciutto e Funghi", Overview = "Passata di pomodoro, Mozzarella, Prosciutto cotto, Funghi", Image = "https://i1.wp.com/www.piccolericette.net/piccolericette/wp-content/uploads/2019/10/4102_Pizza.jpg?resize=895%2C616&ssl=1", Price = 7.50m, CategoryId = 1 }
 				);
 
-			
+            modelBuilder.Entity<Ingredient>().HasData(
+				new Ingredient { Id = 1, Name = "Mozzarella" },
+				new Ingredient { Id = 2, Name = "Pomodoro" },
+				new Ingredient { Id = 3, Name = "Basilico" }
+				);
 
-			
+
+
+
             base.OnModelCreating(modelBuilder);
 
         }

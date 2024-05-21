@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using la_mia_pizzeria_static.Models;
 
@@ -11,9 +12,10 @@ using la_mia_pizzeria_static.Models;
 namespace la_mia_pizzeria_static.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    partial class PizzaContextModelSnapshot : ModelSnapshot
+    [Migration("20240521122033_AddIngredients")]
+    partial class AddIngredients
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace la_mia_pizzeria_static.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("IngredientPizza", b =>
-                {
-                    b.Property<int>("IngredientsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PizzasId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IngredientsId", "PizzasId");
-
-                    b.HasIndex("PizzasId");
-
-                    b.ToTable("IngredientPizza");
-                });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Category", b =>
                 {
@@ -103,26 +90,14 @@ namespace la_mia_pizzeria_static.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PizzaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ingredients");
+                    b.HasIndex("PizzaId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Mozzarella"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Pomodoro"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Basilico"
-                        });
+                    b.ToTable("ingredients");
                 });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>
@@ -199,19 +174,11 @@ namespace la_mia_pizzeria_static.Migrations
                         });
                 });
 
-            modelBuilder.Entity("IngredientPizza", b =>
+            modelBuilder.Entity("la_mia_pizzeria_static.Models.Ingredient", b =>
                 {
-                    b.HasOne("la_mia_pizzeria_static.Models.Ingredient", null)
-                        .WithMany()
-                        .HasForeignKey("IngredientsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("la_mia_pizzeria_static.Models.Pizza", null)
-                        .WithMany()
-                        .HasForeignKey("PizzasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Ingredients")
+                        .HasForeignKey("PizzaId");
                 });
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>
@@ -227,6 +194,11 @@ namespace la_mia_pizzeria_static.Migrations
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Category", b =>
                 {
                     b.Navigation("Pizzas");
+                });
+
+            modelBuilder.Entity("la_mia_pizzeria_static.Models.Pizza", b =>
+                {
+                    b.Navigation("Ingredients");
                 });
 #pragma warning restore 612, 618
         }
