@@ -1,4 +1,7 @@
-﻿using la_mia_pizzeria_static.Models;
+using la_mia_pizzeria_static.Data;
+using la_mia_pizzeria_static.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria_static;
 
@@ -7,6 +10,10 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<PizzaContext>();
+        
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
@@ -28,13 +35,17 @@ public class Program
 
         app.UseRouting();
 
+        app.UseAuthentication();
+
         app.UseAuthorization();
 
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
-
+        app.MapRazorPages();
         app.Run();
     }
 }
+
+
 

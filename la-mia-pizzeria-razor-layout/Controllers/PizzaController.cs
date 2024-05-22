@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria_static.Data;
 using la_mia_pizzeria_static.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
@@ -9,12 +10,14 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class pizzaController : Controller
     {
-      
+
+        [Authorize(Roles = "ADMIN, USER")]
         public IActionResult Index()
         {
             return View(PizzaManager.GetAllPizzas());
         }
 
+        [Authorize(Roles = "ADMIN, USER")]
         public IActionResult Details(int id)
         {
             var pizza = PizzaManager.GetPizza(id, true);
@@ -24,7 +27,7 @@ namespace la_mia_pizzeria_static.Controllers
                 return View("errore");
         }
 
-
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -36,7 +39,7 @@ namespace la_mia_pizzeria_static.Controllers
             return View(model);
         }
 
-
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(PizzaFormModel data)
@@ -52,6 +55,7 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -71,6 +75,7 @@ namespace la_mia_pizzeria_static.Controllers
             }
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, PizzaFormModel data)
@@ -84,12 +89,15 @@ namespace la_mia_pizzeria_static.Controllers
                 return View("Edit", data);
             }
 
-            if (PizzaManager.UpdatePizza(id, data.Pizza.Name, data.Pizza.Overview, data.Pizza.CategoryId, data.SelectedIngredients))
+            var pizzaToEdit = PizzaManager.UpdatePizza(id, data.Pizza, data.SelectedIngredients);
+
+            if (pizzaToEdit)
                 return RedirectToAction("Index");
             else
                 return NotFound();
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)

@@ -10,6 +10,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("1b6cd2ed-579d-4a4a-a1c1-e092270837ab")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("la-mia-pizzeria-razor-layout")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
